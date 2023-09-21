@@ -8,6 +8,7 @@ namespace App1.Views
         string currentInput = string.Empty;
         double result = 0;
         string currentOperator = string.Empty;
+        const int MaxInputLength = 20; // Límite máximo de dígitos
 
         public AboutPage()
         {
@@ -17,8 +18,18 @@ namespace App1.Views
         private void OnNumberButtonClicked(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            currentInput += button.Text;
-            display.Text = currentInput;
+
+            // Verificar si la longitud actual de currentInput es menor que MaxInputLength
+            if (currentInput.Length < MaxInputLength)
+            {
+                currentInput += button.Text;
+                display.Text = currentInput;
+            }
+            else
+            {
+                // Puedes mostrar un mensaje o manejar el exceso de dígitos de alguna manera
+                DisplayAlert("Advertencia", "Ha alcanzado el límite máximo de 20 caracteres.", "OK");
+            }
         }
 
         private void OnOperatorButtonClicked(object sender, EventArgs e)
@@ -74,5 +85,9 @@ namespace App1.Views
             currentOperator = string.Empty;
             display.Text = "0";
         }
+
+       
     }
+
+
 }
